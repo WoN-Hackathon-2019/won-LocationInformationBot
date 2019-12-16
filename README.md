@@ -1,15 +1,33 @@
 # Location Information Bot
 
-This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the seeker with useful information about the desired location via a direct message. 
+This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the client with useful information about the desired location via a direct message. 
 
-# Web of Needs Bot Skeleton
+# RubberDuckyStudio
 
-This skeleton contains a bot that creates a Service Atom that one can connect to. 
-For each atom that has been created on the configured node(s), the bot sends a message with the atomUri of the created Atom to everyone that is connected to the Service Atom.
+Team: [RubberDuckyStudio](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot)
 
-The Bot Skeleton is a [Spring Boot Application](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html).
+Members:
+* https://github.com/Zai-shen
+* https://github.com/kevingufler
+* https://github.com/Schlizohr
 
-## Running the bot
+
+## Projects
+### LI Bot
+The [LocationInformation-Bot](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot) provides information about a given location. 
+It reacts to Atoms with one of the following tags: [location information, locationinformation, location-information,
+            position information, positioninformation, position-information, pi, li]
+
+
+## Cooperations
+
+Wetter bot coop todo...
+
+--- --- ---
+
+
+
+# Running the bot
 
 ### Prerequisites
 
