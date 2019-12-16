@@ -1,3 +1,7 @@
+# Location Information Bot
+
+This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the seeker with useful information about the desired location via a direct message. 
+
 # Web of Needs Bot Skeleton
 
 This skeleton contains a bot that creates a Service Atom that one can connect to. 
