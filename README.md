@@ -1,6 +1,30 @@
 # Location Information Bot
 
-This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the seeker with useful information about the desired location via a direct message. 
+This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the client with useful information about the desired location via a direct message. 
+
+# RubberDuckyStudio
+
+Team: [RubberDuckyStudio](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot)
+
+Members:
+* https://github.com/Zai-shen
+* https://github.com/kevingufler
+* https://github.com/Schlizohr
+
+
+## Projects
+### Example Project
+The LocationInformation-Bot provides information about a given location. 
+It reacts to Atoms with one of the following tags: [location information, locationinformation, location-information,
+            position information, positioninformation, position-information, pi, li]
+[Our awesome project](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot)
+
+# Cooperations
+
+Wetter bot coop todo...
+
+
+
 
 # Web of Needs Bot Skeleton
 
