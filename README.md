@@ -28,14 +28,7 @@ Wetter bot coop todo...
 
 
 
-# Web of Needs Bot Skeleton
-
-This skeleton contains a bot that creates a Service Atom that one can connect to. 
-For each atom that has been created on the configured node(s), the bot sends a message with the atomUri of the created Atom to everyone that is connected to the Service Atom.
-
-The Bot Skeleton is a [Spring Boot Application](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html).
-
-## Running the bot
+# Running the bot
 
 ### Prerequisites
 
