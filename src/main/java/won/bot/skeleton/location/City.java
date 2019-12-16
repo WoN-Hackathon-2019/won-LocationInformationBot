@@ -148,6 +148,7 @@ public class City {
     @Override
     public String toString() {
         return  "## " + name + " (longitude:" + longitude + ", latitude:" + latitude + ")\n" +
+                "---\n" +
                 "*English name*: " + englishName + "\n" +
                 "*Country*: " + country + "\n" +
                 "*Region*: " + region + "\n" +
@@ -156,7 +157,7 @@ public class City {
                 "*Area*: " + area + "m² \n" +
                 "*CallingCodes*: " + callingCodes + "\n" +
                 "*TopLevelDomain*: " + topLevelDomain + "\n" +
-                "*Timezones*: " + timezones + "\n" +
+                "*Timezones*: " + timezones + "\n  \n" +
                 "## Interesting Locations: \n" + intLocsPrintPretty();
     }
 }
