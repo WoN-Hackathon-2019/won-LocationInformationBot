@@ -13,7 +13,7 @@ Members:
 
 
 ## Projects
-### Example Project
+### LI Bot
 The LocationInformation-Bot provides information about a given location. 
 It reacts to Atoms with one of the following tags: [location information, locationinformation, location-information,
             position information, positioninformation, position-information, pi, li]
