@@ -148,7 +148,7 @@ public class LocationData {
     public void additionalInfoToCity(City tmpCity, String name) {
         String wiki_api_eng = "https://en.wikipedia.org/w/api.php?";
         String wiki_api_de = "https://de.wikipedia.org/w/api.php?";
-        int searchRadius = 5000; //meter, max is 10000 defined by API
+        int searchRadius = 10000; //meter, max is 10000 defined by API
         String urlString = wiki_api_eng + "action=query&list=geosearch&gsradius=" + searchRadius + "&gscoord=" + tmpCity.getLatitude() + "|" + tmpCity.getLongitude() + "&format=json";
         //System.out.println(urlString);
         String wikiStr = readFromUrl(urlString);

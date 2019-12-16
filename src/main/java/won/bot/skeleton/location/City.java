@@ -18,7 +18,7 @@ public class City {
     private List<String> topLevelDomain;
     private List<String> timezones;
 
-    public City(){
+    public City() {
         interestingLocations = new ArrayList<>();
     }
 
@@ -77,6 +77,7 @@ public class City {
     public void setTimezones(List<String> timezones) {
         this.timezones = timezones;
     }
+
     public List<InterestingLocation> getInterestingLocations() {
         return interestingLocations;
     }
@@ -125,43 +126,38 @@ public class City {
         this.region = region;
     }
 
-    private String intLocsPrintPretty(){ //TODO: hier wurde geändert
+    private String intLocsPrintPretty() { //TODO: hier wurde geändert
         String pretty = "\n";
 
         int count = 0;
-        if (interestingLocations.size() == 0){
+        if (interestingLocations.size() == 0) {
             return "no interesting locations found";
-        }else if (interestingLocations.size() < 5){
+        } else if (interestingLocations.size() < 5) {
             count = interestingLocations.size();
-        }else {
+        } else {
             count = 5; //amount of locations shown
         }
 
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             pretty += this.interestingLocations.get(i).toString() + "\n";
         }
-        /*
-        for (InterestingLocation intLoc: this.interestingLocations) {
-        pretty += "\n" +       intLoc.getTitle() + " " +
-                               intLoc.getDistance() + "m" +
-                  "\n" +       intLoc.getFullUrl() + "\n";
-        }*/
 
         return pretty;
     }
 
     @Override
     public String toString() {
-        return  name+"(longitude:"+longitude+", latitude:"+latitude+")\n===========\n"+
-                "English name: " + englishName + "\n" +
-                "Country: " + country + "\n" +
-                "Region: " + region + "\n" +
-                "Capital: " + capital + "\n" +
-                "Population: " + population + "\n" +
-                "Area: " + area + "\n" +
-                "CallingCodes: " + callingCodes + "\n" +
-                "TopLevelDomain: " + topLevelDomain + "\n" +
-                "Timezones: " + timezones + "\n" +
-                "## Interesting Locations: ##\n" + intLocsPrintPretty();
+        return  "## " + name + " (longitude:" + longitude + ", latitude:" + latitude + ")\n" +
+                "_______\n" +
+                "*English name*: " + englishName + "\n" +
+                "*Country*: " + country + "\n" +
+                "*Region*: " + region + "\n" +
+                "*Capital*: " + capital + "\n" +
+                "*Population*: " + population + "\n" +
+                "*Area*: " + area + "m² \n" +
+                "*CallingCodes*: " + callingCodes + "\n" +
+                "*TopLevelDomain*: " + topLevelDomain + "\n" +
+                "*Timezones*: " + timezones + "\n" +
+                "## Interesting Locations: \n" + intLocsPrintPretty();
     }
 }

@@ -48,8 +48,8 @@ public class InterestingLocation {
 
     @Override
     public String toString() { //TODO: hier wurde geändert
-        return  "_______\n"+"Name: " + title + "\n" +
-                "Distance: " + distance + "\n" +
-                "Url=" + fullUrl + "\n";
+        return  "_______\n"+"*Name*: " + title + "\n" +
+                "*Distance*: " + distance + "m\n" +
+                "*URL*: " + fullUrl + "\n";
     }
 }
