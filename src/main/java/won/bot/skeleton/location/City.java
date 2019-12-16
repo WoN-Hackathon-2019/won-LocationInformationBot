@@ -129,6 +129,31 @@ public class City {
         this.region = region;
     }
 
+    private String intLocsPrintPretty(){
+        String pretty = "\n";
+
+        int count = 0;
+        if (interestingLocations.size() == 0){
+            return "no interesting locations found";
+        }else if (interestingLocations.size() < 5){
+            count = interestingLocations.size();
+        }else {
+            count = 5; //amount of locations shown
+        }
+
+        for (int i = 0; i < count; i++){
+            pretty += this.interestingLocations.get(i).toString() + "\n";
+        }
+        /*
+        for (InterestingLocation intLoc: this.interestingLocations) {
+        pretty += "\n" +       intLoc.getTitle() + " " +
+                               intLoc.getDistance() + "m" +
+                  "\n" +       intLoc.getFullUrl() + "\n";
+        }*/
+
+        return pretty;
+    }
+
     @Override
     public String toString() {
         return "City{" +
@@ -144,7 +169,7 @@ public class City {
                 ", callingCodes=" + callingCodes +
                 ", topLevelDomain='" + topLevelDomain + '\'' +
                 ", timezones=" + timezones +
-                ", interestingLocations=" + interestingLocations.toString() +
+                ", interestingLocations=" + intLocsPrintPretty() + //interestingLocations.toString() +
                 '}';
     }
 }

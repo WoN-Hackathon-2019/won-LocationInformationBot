@@ -48,7 +48,7 @@ public class InterestingLocation {
 
     @Override
     public String toString() {
-        return "InterestingLocation{" +
+        return "{" +
                 "title='" + title + '\'' +
                 ", distance=" + distance +
                 ", fullUrl='" + fullUrl + '\'' +

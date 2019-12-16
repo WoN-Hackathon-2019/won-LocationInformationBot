@@ -158,13 +158,14 @@ public class GDS {
                 JsonObject r2 = r1.get("pages").getAsJsonObject();
                 JsonObject r3 = r2.get(curr).getAsJsonObject();
                 String result = r3.get("fullurl").toString();
+                //System.out.println(result);
                 tempIntLoc.setFullUrl(result.substring(1, result.length() - 1));
             } else if (str.contains("title")) {
                 tempIntLoc.setTitle(str.substring(9, str.length() - 1));
             } else if (str.contains("dist")) {
                 tempIntLoc.setDistance(Float.parseFloat(str.substring(7)));
             }
-            if (jsonIndex % 8 == 0) {
+            if (jsonIndex % 7 == 0) {
                 intLocList.add(tempIntLoc);
                 tempIntLoc = new InterestingLocation();
             }

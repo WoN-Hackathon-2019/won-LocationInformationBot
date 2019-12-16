@@ -7,6 +7,6 @@ public class TestLocation {
         //System.out.println(testGDS.getCityByLngLat(11.576124,48.137154)); //Munich
         //System.out.println(testGDS.getCityByLngLat(12.4608,41.9015)); //Rome
         //System.out.println(testGDS.getCityByLngLat(13.055,47.8095)); //Salzburg
-        System.out.println("List: " + testGDS.getCityByLngLat(42, 42));
+        //System.out.println("List: " + testGDS.getCityByLngLat(42, 42));
     }
 }
