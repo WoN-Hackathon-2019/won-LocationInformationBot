@@ -148,7 +148,6 @@ public class City {
     @Override
     public String toString() {
         return  "## " + name + " (longitude:" + longitude + ", latitude:" + latitude + ")\n" +
-                "_______\n" +
                 "*English name*: " + englishName + "\n" +
                 "*Country*: " + country + "\n" +
                 "*Region*: " + region + "\n" +
