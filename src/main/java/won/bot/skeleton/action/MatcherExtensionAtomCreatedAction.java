@@ -13,7 +13,7 @@ import won.bot.framework.extensions.matcher.MatcherExtensionAtomCreatedEvent;
 import won.bot.framework.extensions.serviceatom.ServiceAtomContext;
 import won.bot.skeleton.context.SkeletonBotContextWrapper;
 import won.bot.skeleton.location.City;
-import won.bot.skeleton.location.GDS;
+import won.bot.skeleton.location.LocationData;
 import won.protocol.model.Coordinate;
 import won.protocol.util.DefaultAtomModelWrapper;
 import won.protocol.util.linkeddata.WonLinkedDataUtils;
@@ -29,7 +29,7 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private List<String> validTags = Arrays.asList("location information", "locationinformation", "location-information",
             "position information", "positioninformation", "position-information", "pi", "li");
-    private static final GDS testGDS = new GDS();
+    private static final LocationData testGDS = new LocationData();
 
     public MatcherExtensionAtomCreatedAction(EventListenerContext eventListenerContext) {
         super(eventListenerContext);

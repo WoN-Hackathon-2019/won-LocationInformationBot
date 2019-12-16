@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class GDS {
+public class LocationData {
     String apiKey = "X6RG20EXBIOOERD2YNTZDHK6XTCWNN3L";
 
     public List<City> getCityByLngLat(double lng, double lat) {
@@ -68,15 +68,14 @@ public class GDS {
                 City tmpCity = new City();
                 JsonObject jsonObject = new JsonParser().parse(str).getAsJsonObject();
 
-                tmpCity.setCountry(jsonObject.get("country").toString());
-                tmpCity.setName(jsonObject.get("city").toString());
-                tmpCity.setRegion(jsonObject.get("region").toString());
+                tmpCity.setCountry(jsonObject.get("country").toString().replace("\"",""));
+                tmpCity.setName(jsonObject.get("city").toString().replace("\"",""));
+                tmpCity.setRegion(jsonObject.get("region").toString().replace("\"",""));
                 tmpCity.setLatitude(jsonObject.get("latitude").getAsDouble());
                 tmpCity.setLongitude(jsonObject.get("longitude").getAsDouble());
 
                 additionalInfoToCity(tmpCity, tmpCity.getRegion());
 
-                ret.add(tmpCity);
                 ret.add(tmpCity);
             }
         } catch (UnsupportedOperationException e) {
@@ -112,8 +111,8 @@ public class GDS {
             //System.out.println("String: "+moreInfos);
             JsonObject jsonObject = new JsonParser().parse(moreInfos).getAsJsonObject();
 
-            city.setEnglishName(jsonObject.get("name").toString());
-            city.setCapital(jsonObject.get("capital").toString());
+            city.setEnglishName(jsonObject.get("name").toString().replace("\"",""));
+            city.setCapital(jsonObject.get("capital").toString().replace("\"",""));
             city.setPopulation(jsonObject.get("population").getAsInt());
             city.setArea(jsonObject.get("area").getAsInt());
 

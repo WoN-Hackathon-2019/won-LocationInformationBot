@@ -152,20 +152,16 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", region='" + region + '\'' +
-                ", englishName='" + englishName + '\'' +
-                ", capital='" + capital + '\'' +
-                ", population=" + population +
-                ", area=" + area +
-                ", callingCodes=" + callingCodes +
-                ", topLevelDomain='" + topLevelDomain + '\'' +
-                ", timezones=" + timezones +
-                ", interestingLocations=" + intLocsPrintPretty() + //interestingLocations.toString() +
-                '}';
+        return  name+"(longitude:"+longitude+", latitude:"+latitude+")\n===========\n"+
+                "English name: " + englishName + "\n" +
+                "Country: " + country + "\n" +
+                "Region: " + region + "\n" +
+                "Capital: " + capital + "\n" +
+                "Population: " + population + "\n" +
+                "Area: " + area + "\n" +
+                "CallingCodes: " + callingCodes + "\n" +
+                "TopLevelDomain: " + topLevelDomain + "\n" +
+                "Timezones: " + timezones + "\n" +
+                "## Interesting Locations: ##\n" + intLocsPrintPretty();
     }
 }
