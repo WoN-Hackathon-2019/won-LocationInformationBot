@@ -14,10 +14,9 @@ Members:
 
 ## Projects
 ### LI Bot
-The LocationInformation-Bot provides information about a given location. 
+The [LocationInformation-Bot](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot) provides information about a given location. 
 It reacts to Atoms with one of the following tags: [location information, locationinformation, location-information,
             position information, positioninformation, position-information, pi, li]
-[Our awesome project](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot)
 
 
 ## Cooperations
