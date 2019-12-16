@@ -165,7 +165,7 @@ public class GDS {
             } else if (str.contains("dist")) {
                 tempIntLoc.setDistance(Float.parseFloat(str.substring(7)));
             }
-            if (jsonIndex % 7 == 0) {
+            if (jsonIndex % 7 == 0) { //TODO: hier wurde geändert
                 intLocList.add(tempIntLoc);
                 tempIntLoc = new InterestingLocation();
             }
