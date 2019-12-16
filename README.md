@@ -19,10 +19,12 @@ It reacts to Atoms with one of the following tags: [location information, locati
             position information, positioninformation, position-information, pi, li]
 [Our awesome project](https://github.com/WoN-Hackathon-2019/won-LocationInformationBot)
 
-# Cooperations
+
+## Cooperations
 
 Wetter bot coop todo...
 
+--- --- ---
 
 
 
