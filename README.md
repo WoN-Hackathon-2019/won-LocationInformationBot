@@ -29,6 +29,9 @@ Wetter bot coop todo...
 
 # Running the bot
 
+## Useful HowTo's
+[HowTo](https://github.com/researchstudio-sat/webofneeds/tree/master/documentation/howto)
+
 ### Prerequisites
 
 - [Openjdk 8](https://adoptopenjdk.net/index.html) - the method described here does **not work** with the Oracle 8 JDK!
