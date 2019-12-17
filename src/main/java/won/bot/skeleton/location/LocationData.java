@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LocationData {
-    String apiKey = "X6RG20EXBIOOERD2YNTZDHK6XTCWNN3L";
+    String apiKey = "ENTER_YOUR_GEODATASOURCE_API_KEY"; //
 
     public List<City> getCityByLngLat(double lng, double lat) {
         List<City> tmpList = jsonToCityFromGeoDataSource(getCitiesInJSONFromGeoDataSource(lng, lat));
@@ -92,7 +92,7 @@ public class LocationData {
                 .url("https://restcountries-v1.p.rapidapi.com/alpha/" + countryCode.replace("\"", ""))
                 .get()
                 .addHeader("x-rapidapi-host", "restcountries-v1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "a6e18e2b94msh3b3d516a1ba8628p1e8c03jsn2b1f72c839c0")
+                .addHeader("x-rapidapi-key", "ENTER_YOUR_RAPIDAPI_KEY")
                 .build();
 
         try {
