@@ -1,6 +1,6 @@
 # Location Information Bot
 
-This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the client with useful information about the desired location via a direct message. 
+This bot connects to a custom atom, which provides the Location Information (or li, pi, etc.) tag. It then provides the client with useful information about the desired location via a direct message. Cooperation with TranslateBot for additional info.
 
 # RubberDuckyStudio
 
