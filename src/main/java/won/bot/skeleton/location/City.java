@@ -145,17 +145,36 @@ public class City {
         return pretty;
     }
 
+    private String populationPrintPretty() { //TODO: hier wurde geändert
+        StringBuilder builder = new StringBuilder(Long.toString(this.population));
+        int count = 1;
+        List<Integer> intList = new ArrayList<>();
+
+        for (int i = builder.length(); i>0;i--) {
+            if (count % 3 == 0) {
+                intList.add(builder.length() - (count));
+            }
+            count++;
+        }
+
+        for (Integer place:intList) {
+            builder.insert(place,".");
+        }
+
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         return  "## " + name + " (longitude:" + longitude + ", latitude:" + latitude + ")\n" +
                 "---\n" +
-                "*English name*: " + englishName + "\n" +
+                "*Name(English)*: " + englishName + "\n" +
                 "*Country*: " + country + "\n" +
                 "*Region*: " + region + "\n" +
                 "*Capital*: " + capital + "\n" +
-                "*Population*: " + population + "\n" +
+                "*Population*: " + populationPrintPretty() + " People\n" +
                 "*Area*: " + area + "m² \n" +
-                "*CallingCodes*: " + callingCodes + "\n" +
+                "*CallingCodes*: " + "+" + callingCodes + "\n" +
                 "*TopLevelDomain*: " + topLevelDomain + "\n" +
                 "*Timezones*: " + timezones + "\n  \n" +
                 "## Interesting Locations: \n" + intLocsPrintPretty();
