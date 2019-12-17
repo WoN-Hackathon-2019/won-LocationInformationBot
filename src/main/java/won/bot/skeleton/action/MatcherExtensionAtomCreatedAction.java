@@ -105,7 +105,7 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
         System.out.println("uri: " + targetURI);
         if (!uri.isEmpty()) {
             System.out.println("socket is present");
-            ConnectCommandEvent connectCommandEvent = new ConnectCommandEvent(myAtomSocketURI, targetURI, message);
+            ConnectCommandEvent connectCommandEvent = new ConnectCommandEvent(myAtomSocketURI, targetURI, city.toString());
             System.out.println("connectCommand: " + connectCommandEvent);
             ctx.getEventBus().publish(connectCommandEvent);
         }
