@@ -100,15 +100,6 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
             ctx.getEventBus().publish(new ConnectionMessageCommandEvent(connection, message));
         } catch (Exception ignored) {
         }
-
-
-        System.out.println("uri: " + targetURI);
-        if (!uri.isEmpty()) {
-            System.out.println("socket is present");
-            ConnectCommandEvent connectCommandEvent = new ConnectCommandEvent(myAtomSocketURI, targetURI, city.toString());
-            System.out.println("connectCommand: " + connectCommandEvent);
-            ctx.getEventBus().publish(connectCommandEvent);
-        }
     }
 
     private City getCity(Coordinate coordinate) {
@@ -136,5 +127,9 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
         ConnectCommandEvent connectCommandEvent = new ConnectCommandEvent(myAtomSocketURI, globalChatinatorURI, "hello");
         EventListenerContext ctx = getEventListenerContext();
         ctx.getEventBus().publish(connectCommandEvent);
+    }
+
+    public static String getGlobalChatinator() {
+        return globalChatinator;
     }
 }
