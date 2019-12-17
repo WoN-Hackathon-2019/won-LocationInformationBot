@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,9 +18,7 @@ public class TranslatorCommand {
     private static Double sourceLat = 51.509865;
 
     private static String message = "Hello \n Good bye \n Thank you \n Good Morning \n Where is the next toilet \n Hungry \n Angry";
-    private static String rdfId = "LocationInformationBot";
-
-    private static String rdfid = "regID";
+    private static String rdfId = "reqID";
 
     public static String createMessageForSending(float targetLatitude, float targetLongitude, URI uri) {
         JsonObject jsonObject = new JsonObject();
@@ -28,15 +27,19 @@ public class TranslatorCommand {
         jsonObject.addProperty("text", message);
         jsonObject.addProperty("sourceLat", sourceLat);
         jsonObject.addProperty("sourceLon", sourceLon);
-        jsonObject.addProperty(rdfid, uri.toString());
+        jsonObject.addProperty(rdfId, uri.toString());
         System.out.println(jsonObject.toString());
         return jsonObject.toString();
     }
 
-    public static String getParsedMessageFromResponse(String jsonString) {
+    public static String getParsedMessageFromResponse(String jsonString) throws URISyntaxException {
+        System.out.println("jsonString parse form response" + jsonString);
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = (JsonObject) parser.parse(jsonString);
-        return prettyMessage(jsonObject.get("message").toString());
+        URI uri = new URI(jsonObject.get(rdfId).toString().replace("\"", ""));
+        if (connections.containsKey(uri)) {
+            return connections.get(uri) + "\n" + prettyMessage(jsonObject.get("message").toString());
+        } else return null;
     }
 
     private static String prettyMessage(String translation) {
@@ -50,9 +53,12 @@ public class TranslatorCommand {
     }
 
     public static String getUri(String message) {
-        JsonParser parser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) parser.parse(message);
-        return jsonObject.get(rdfId).toString();
+        System.out.println("message to parse to json: " + message);
+        JsonObject jsonObject = new JsonParser().parse(message).getAsJsonObject();
+        System.out.println("jsonObject: " + jsonObject.toString());
+        String string = jsonObject.get(rdfId).toString();
+        System.out.println("rdfId: " + string);
+        return string.replace("\"", "");
     }
 
     public static void putConnection(URI uri, City city) {
