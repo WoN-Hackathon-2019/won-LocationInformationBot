@@ -31,7 +31,6 @@ Translation Bot: Gather translation for some important words/sentences for the s
 
 ## Useful HowTo's
 [HowTo](https://github.com/researchstudio-sat/webofneeds/tree/master/documentation/howto)
-Change API Keys in LocationData.java
 
 ### Prerequisites
 
@@ -62,6 +61,7 @@ If you get a message indicating your keysize is restricted on startup (`JCE unli
 
 ##### Optional Parameters for both Run Configurations:
 - `WON_KEYSTORE_DIR` path to folder where `bot-keys.jks` and `owner-trusted-certs.jks` are stored (needs write access and folder must exist) 
+Change API Keys in LocationData.java
 
 ## Start coding
 
