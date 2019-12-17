@@ -5,9 +5,11 @@ import com.google.gson.JsonParser;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TranslatorCommand {
 
@@ -17,7 +19,7 @@ public class TranslatorCommand {
     private static Double sourceLon = -0.118092;
     private static Double sourceLat = 51.509865;
 
-    private static String message = "Hello \n Good bye \n Thank you \n Good Morning \n Where is the next toilet \n Hungry \n Angry";
+    private static String message = "Hello ; Good bye ; Thank you ; Good Morning ; Where is the toilet ; Hungry ";
     private static String rdfId = "reqID";
 
     public static String createMessageForSending(float targetLatitude, float targetLongitude, URI uri) {
@@ -42,14 +44,26 @@ public class TranslatorCommand {
         } else return null;
     }
 
+    public static void main(String[] args) {
+        String test="\"Ciao.\n Arrivederci\n Grazie\n Buongiorno\n Dove si trova il prossimo bagno\n affamato\n Arrabbiato\"";
+        System.out.println("out:"+prettyMessage(test));
+    }
+
     private static String prettyMessage(String translation) {
-        String[] translationSplit = translation.split("\n");
-        String[] messageSplit = message.split("\n");
-        StringBuilder returnMessage = new StringBuilder();
+        System.out.println(translation);
+        String[] translationSplit = translation.replace("\"","").split(";");
+        String[] messageSplit = message.split(";");
+        System.out.println("OUTPUT:"+ Arrays.stream(translationSplit).collect(Collectors.joining())+"\n"+ Arrays.stream(messageSplit).collect(Collectors.joining()));
+        String returnMessage = "_____________________\n";
         for (int i = 0; i < translationSplit.length; i++) {
-            returnMessage.append(messageSplit[i]).append(": ").append(translationSplit[i]).append("\n");
+            //System.out.println("i="+i);
+            try {
+                returnMessage += messageSplit[i] + ": " + translationSplit[i] + "\n";
+            }catch(Exception e){}
+            //System.out.println(messageSplit[i]+" "+translationSplit[i]);
+            //returnMessage.append(messageSplit[i]).append(": ").append(translationSplit[i]).append("\n");
         }
-        return returnMessage.toString();
+        return returnMessage;
     }
 
     public static String getUri(String message) {
