@@ -31,6 +31,7 @@ Translation Bot: Gather translation for some important words/sentences for the s
 
 ## Useful HowTo's
 [HowTo](https://github.com/researchstudio-sat/webofneeds/tree/master/documentation/howto)
+Change API Keys in LocationData.java
 
 ### Prerequisites
 
