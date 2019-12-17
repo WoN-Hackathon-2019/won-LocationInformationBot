@@ -18,6 +18,8 @@ import java.net.URI;
 
 public class TranslatorAction extends BaseEventBotAction {
 
+    private String responseMessage;
+
     protected TranslatorAction(EventListenerContext eventListenerContext) {
         super(eventListenerContext);
     }
@@ -26,7 +28,7 @@ public class TranslatorAction extends BaseEventBotAction {
     protected void doRun(Event event, EventListener eventListener) throws Exception {
         EventListenerContext ctx = getEventListenerContext();
         if (event instanceof MessageFromOtherAtomEvent
-                ) { //&& ctx.getBotContextWrapper() instanceof JokeBotContextWrapper
+                ) {
             Connection con = ((MessageFromOtherAtomEvent) event).getCon();
             URI transalateAtomUri = con.getAtomURI();
             String message = "";
@@ -37,6 +39,11 @@ public class TranslatorAction extends BaseEventBotAction {
             }
 
             String responseMessage = TranslatorCommand.getParsedMessageFromResponse(message);
+            if (responseMessage== null || responseMessage.equals("")){
+                this.responseMessage="No Response";
+            }else{
+                this.responseMessage=responseMessage;
+            }
 
             try {
                 Model messageModel = WonRdfUtils.MessageUtils.textMessage(responseMessage);
@@ -51,5 +58,9 @@ public class TranslatorAction extends BaseEventBotAction {
             return null;
         String message = WonRdfUtils.MessageUtils.getTextMessage(wonMessage);
         return StringUtils.trim(message);
+    }
+
+    public String getResponseMessage() {
+        return responseMessage;
     }
 }
