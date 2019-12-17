@@ -21,7 +21,7 @@ It reacts to Atoms with one of the following tags: [location information, locati
 
 ## Cooperations
 
-Wetter bot coop todo...
+Translation Bot: Gather translation for some important words/sentences for the searched city/location
 
 --- --- ---
 
