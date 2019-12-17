@@ -20,7 +20,7 @@ public class TranslatorAction extends BaseEventBotAction {
 
     private String responseMessage;
 
-    protected TranslatorAction(EventListenerContext eventListenerContext) {
+    public TranslatorAction(EventListenerContext eventListenerContext) {
         super(eventListenerContext);
     }
 

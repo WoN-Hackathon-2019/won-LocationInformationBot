@@ -1,11 +1,7 @@
 package won.bot.skeleton.impl;
 
-import java.lang.invoke.MethodHandles;
-import java.net.URI;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import won.bot.framework.bot.base.EventBot;
 import won.bot.framework.eventbot.EventListenerContext;
 import won.bot.framework.eventbot.action.BaseEventBotAction;
@@ -17,6 +13,7 @@ import won.bot.framework.eventbot.event.impl.command.connect.ConnectCommandResul
 import won.bot.framework.eventbot.event.impl.command.connect.ConnectCommandSuccessEvent;
 import won.bot.framework.eventbot.event.impl.wonmessage.CloseFromOtherAtomEvent;
 import won.bot.framework.eventbot.event.impl.wonmessage.ConnectFromOtherAtomEvent;
+import won.bot.framework.eventbot.event.impl.wonmessage.MessageFromOtherAtomEvent;
 import won.bot.framework.eventbot.filter.impl.AtomUriInNamedListFilter;
 import won.bot.framework.eventbot.filter.impl.CommandResultFilter;
 import won.bot.framework.eventbot.filter.impl.NotFilter;
@@ -28,7 +25,11 @@ import won.bot.framework.extensions.matcher.MatcherExtensionAtomCreatedEvent;
 import won.bot.framework.extensions.serviceatom.ServiceAtomBehaviour;
 import won.bot.framework.extensions.serviceatom.ServiceAtomExtension;
 import won.bot.skeleton.action.MatcherExtensionAtomCreatedAction;
+import won.bot.skeleton.action.TranslatorAction;
 import won.bot.skeleton.context.SkeletonBotContextWrapper;
+
+import java.lang.invoke.MethodHandles;
+import java.net.URI;
 
 public class SkeletonBot extends EventBot implements MatcherExtension, ServiceAtomExtension {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -131,5 +132,6 @@ public class SkeletonBot extends EventBot implements MatcherExtension, ServiceAt
                 botContextWrapper.removeConnectedSocket(senderSocketUri, targetSocketUri);
             }
         });
+        bus.subscribe(MessageFromOtherAtomEvent.class, new TranslatorAction(ctx));
     }
 }

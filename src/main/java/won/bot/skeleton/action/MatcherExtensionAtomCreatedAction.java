@@ -8,16 +8,15 @@ import won.bot.framework.eventbot.EventListenerContext;
 import won.bot.framework.eventbot.action.BaseEventBotAction;
 import won.bot.framework.eventbot.event.Event;
 import won.bot.framework.eventbot.event.impl.command.connect.ConnectCommandEvent;
-import won.bot.framework.eventbot.event.impl.command.connect.ConnectCommandResultEvent;
-import won.bot.framework.eventbot.event.impl.command.connect.ConnectCommandSuccessEvent;
-import won.bot.framework.eventbot.filter.impl.CommandResultFilter;
+import won.bot.framework.eventbot.event.impl.command.connectionmessage.ConnectionMessageCommandEvent;
 import won.bot.framework.eventbot.listener.EventListener;
-import won.bot.framework.eventbot.listener.impl.ActionOnFirstEventListener;
 import won.bot.framework.extensions.matcher.MatcherExtensionAtomCreatedEvent;
 import won.bot.framework.extensions.serviceatom.ServiceAtomContext;
 import won.bot.skeleton.context.SkeletonBotContextWrapper;
 import won.bot.skeleton.location.City;
 import won.bot.skeleton.location.LocationData;
+import won.bot.skeleton.location.TranslatorCommand;
+import won.protocol.model.Connection;
 import won.protocol.model.Coordinate;
 import won.protocol.util.DefaultAtomModelWrapper;
 import won.protocol.util.linkeddata.LinkedDataSource;
@@ -31,7 +30,6 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -41,7 +39,7 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
 
     //GlobalChatinator
     private static String globalChatinator = "TranslateBot";
-    private static URI getGlobalChatinatorURI;
+    private static URI globalChatinatorURI;
 
     public MatcherExtensionAtomCreatedAction(EventListenerContext eventListenerContext) {
         super(eventListenerContext);
@@ -79,43 +77,42 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
         if (!CollectionUtils.containsAny(defaultAtomModelWrapper.getAllTags(), validTags)) {
             return;
         }
-        System.out.println("Atom for me: " + atomCreatedEvent.getAtomData().getUnionModel());
-        System.out.println("myAtomURI: " + myAtomURI);
-        System.out.println("getLinkedDataSources " + collection.toString());
-        System.out.println("myAtomSocketURI: " + myAtomSocketURI);
-
         Coordinate coordinate = null;
         for (Resource node : defaultAtomModelWrapper.getSeeksNodes()) {
             coordinate = defaultAtomModelWrapper.getLocationCoordinate(node);
         }
         if (coordinate == null) return;
 
-        String message = constructMessage(coordinate);
-
+        City city = getCity(coordinate);
         String uri = getSocketURIStringOfAtom(defaultAtomModelWrapper, ctx.getLinkedDataSource(), myAtomSocketURI);
         URI targetURI = new URI(uri);
+        TranslatorCommand.putConnection(targetURI, city);
+
+        System.out.println("Atom for me: " + atomCreatedEvent.getAtomData().getUnionModel());
+        System.out.println("myAtomURI: " + myAtomURI);
+        System.out.println("getLinkedDataSources " + collection.toString());
+        System.out.println("myAtomSocketURI: " + myAtomSocketURI);
+
+        String message = TranslatorCommand.createMessageForSending(coordinate.getLatitude(), coordinate.getLongitude(), targetURI);
+        try {
+            Connection connection = WonLinkedDataUtils.getConnectionForConnectionURI(
+                    globalChatinatorURI, ctx.getLinkedDataSource()).get();
+            ctx.getEventBus().publish(new ConnectionMessageCommandEvent(connection, message));
+        } catch (Exception ignored) {
+        }
+
+
         System.out.println("uri: " + targetURI);
         if (!uri.isEmpty()) {
             System.out.println("socket is present");
-            botContextWrapper.addConnectedSocket(myAtomSocketURI, targetURI);
             ConnectCommandEvent connectCommandEvent = new ConnectCommandEvent(myAtomSocketURI, targetURI, message);
             System.out.println("connectCommand: " + connectCommandEvent);
-            ctx.getEventBus().subscribe(ConnectCommandSuccessEvent.class, new ActionOnFirstEventListener(ctx,
-                    new CommandResultFilter(connectCommandEvent), new BaseEventBotAction(ctx) {
-                @Override
-                protected void doRun(Event event, EventListener eventListener) {
-                    ConnectCommandResultEvent connectionMessageCommandResultEvent = (ConnectCommandResultEvent) event;
-                    if (connectionMessageCommandResultEvent.isSuccess()) {
-                        botContextWrapper.removeConnectedSocket(myAtomSocketURI, targetURI);
-                    }
-                }
-            }));
+            ctx.getEventBus().publish(connectCommandEvent);
         }
     }
 
-    private String constructMessage(Coordinate coordinate) {
-        List<City> cityByLngLat = testGDS.getCityByLngLat(coordinate.getLongitude(), coordinate.getLatitude());
-        return cityByLngLat.stream().map(City::toString).collect(Collectors.joining(", "));
+    private City getCity(Coordinate coordinate) {
+        return testGDS.getCityByLngLat(coordinate.getLongitude(), coordinate.getLatitude()).get(0);
     }
 
     private String getSocketURIStringOfAtom(DefaultAtomModelWrapper defaultAtomModelWrapper, LinkedDataSource linkedDataSource, URI myAtomSocketURI) throws URISyntaxException {
@@ -132,9 +129,12 @@ public class MatcherExtensionAtomCreatedAction extends BaseEventBotAction {
     private void initiateTranslator(SkeletonBotContextWrapper botContextWrapper,
                                     DefaultAtomModelWrapper defaultAtomModelWrapper, LinkedDataSource linkedDataSource,
                                     URI myAtomSocketURI) throws URISyntaxException {
-        getGlobalChatinatorURI = new URI(getSocketURIStringOfAtom(defaultAtomModelWrapper, linkedDataSource, myAtomSocketURI));
-        System.out.println("uri: " + getGlobalChatinatorURI);
+        globalChatinatorURI = new URI(getSocketURIStringOfAtom(defaultAtomModelWrapper, linkedDataSource, myAtomSocketURI));
+        System.out.println("uri: " + globalChatinatorURI);
         System.out.println("socket is present");
-        botContextWrapper.addConnectedSocket(myAtomSocketURI, getGlobalChatinatorURI);
+        botContextWrapper.addConnectedSocket(myAtomSocketURI, globalChatinatorURI);
+        ConnectCommandEvent connectCommandEvent = new ConnectCommandEvent(myAtomSocketURI, globalChatinatorURI, "hello");
+        EventListenerContext ctx = getEventListenerContext();
+        ctx.getEventBus().publish(connectCommandEvent);
     }
 }
